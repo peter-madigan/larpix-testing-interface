@@ -1,24 +1,28 @@
-# Here is some example code demonstrating how to query the larpix-testing
-# database and upload results
-#
-# You can customize the default settings by setting these evironment variables:
-#   LARPIX_DB_BASE_URL : url that points the the larpix db base (stored in interface.base_url)
-#   LARPIX_USER : default user to authenticate with (stored in interface.user)
-#
-# The interface is relatively simple::
-#
-#   response, model_urls = interface.query()
-#   model_urls.keys() # database model names
-#   asic_url = model_url['asic'] # url to access 'asic' model functions
-#   response, content = interface.query(asic_url)
-#   print(content['count']) # available 'asic's from query
-#   print(content['results']) # description of 'asic's in query
-#   response, content = interface.create(asic_url, data={'version': 1}) # create new 'asic' in database
-#
-#   response, content = interface.query(asic_url)
-#   asic_id = print(content['results'][0]['pk']) # id used to access 'asic'
-#   response, content = interface.query(asic_url + asic_id) # get info about specific asic
-#   response, content = interface.update(asic_url + asic_id, data={'version': 2}) # update 'asic' entry
+'''
+Here is some example code demonstrating how to query the larpix-testing
+database and upload results
+
+You can customize the default settings by setting these evironment variables:
+  LARPIX_DB_BASE_URL : url that points the the larpix db base (stored in interface.base_url)
+  LARPIX_USER : default user to authenticate with (stored in interface.user)
+
+The interface is relatively simple::
+
+  response, model_urls = interface.get()
+  model_urls.keys() # database model names
+  asic_url = model_url['asic'] # url to access 'asic' model functions
+  response, content = interface.get(asic_url)
+  print(content['count']) # available 'asic's from query
+  print(content['results']) # description of 'asic's in query
+  response, content = interface.post(asic_url, data={'version': 1}) # create new 'asic' in database
+
+  response, content = interface.get(asic_url)
+  asic_id = print(content['results'][0]['pk']) # id associated with 'asic'
+  asic0_url = content['results'][0]['url']
+  response, content = interface.get(asic0_url) # get info about specific asic
+  response, content = interface.patch(asic0_url, data={'version': 2}) # update 'asic' entry
+
+'''
 
 
 import requests
